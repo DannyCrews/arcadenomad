@@ -29,15 +29,14 @@ RSpec.describe Location, type: :model do
   #   expect(location.name).to eq('16-Bit Bar')
   # end
 
-  # it 'assembles a proper virtual address attribute' do
-  #   location = Location.new
-  #   location.name = '16-Bit Bar'
-  #   location.street = '254 South Fourth Street'
-  #   location.city = 'Columbus'
-  #   location.state = 'Ohio'
-  #   location.zip = '43215'
+  it 'assembles a proper virtual address attribute' do
+    @location.name = '16-Bit Bar'
+    @location.street = '254 South Fourth Street'
+    @location.city = 'Columbus'
+    @location.state = 'Ohio'
+    @location.zip = '43215'
 
-  #   expect(location.address).to eq('254 South Fourth Street Columbus, Ohio
-  #                                   43215')
-  # end
+    expect(@location.address).to eq('254 South Fourth Street Columbus, Ohio
+                                    43215')
+  end
 end
