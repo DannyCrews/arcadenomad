@@ -1,4 +1,32 @@
-State.create([
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+#
+# Examples:
+#
+#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Load the categories
+
+categories = Category.create([
+  { :name => 'Amusement'},
+  { :name => 'Restaurant'},
+  { :name => 'Bar'},
+  { :name => 'Barcade'},
+  { :name => 'Bowling Alley'},
+  { :name => 'Skating Rink'},
+  { :name => 'Laundromat'},
+  { :name => 'Movie Theater'},
+  { :name => 'Pool Hall'},
+  { :name => 'Arcade'},
+  { :name => 'Amusement Park'},
+  { :name => 'Airport'},
+  { :name => 'Other'}
+])
+
+# Load the states
+
+states = State.create([
   { :name => 'Alabama', :abbreviation => 'AL'},
   { :name => 'Alaska', :abbreviation => 'AK'},
   { :name => 'Arizona', :abbreviation => 'AZ'},
@@ -51,3 +79,79 @@ State.create([
   { :name => 'Wisconsin', :abbreviation => 'WI'},
   { :name => 'Wyoming', :abbreviation => 'WY'}
 ])
+
+# # Load the games
+
+# games_data = YAML.load_file(Rails.root.join('db/seeds/games_list.yml'))
+
+# games_data.each do |game|
+
+#   manufacturer = Manufacturer.find_or_initialize_by(name: game['manufacturer'])
+
+#   manufacturer.games << Game.new(name: game['game'], description: 'A vintage arcade game.', release_date: game['year'])
+
+#   manufacturer.save
+
+# end
+
+# # Load the locations and location/game mappings
+
+# locations_data = YAML.load_file(Rails.root.join('db/seeds/locations_list.yml'))
+
+# locations_data.each { |l|
+
+#   state = State.find_by(:abbreviation => l['state'])
+
+#   location = Location.new(:name => l['location'],
+#                           :description => l['description'],
+#                           :street => l['street'],
+#                           :city => l['city'],
+#                           :state => state,
+#                           :zip => l['zip'],
+#                           :telephone => l['telephone'],
+#                           :url => l['url']
+#   )
+
+#   # Assign the location games
+
+#   games = l['games']
+
+#   games.each do |g|
+
+#     game = Game.find_by(name: g)
+
+#     arcade = Arcade.new(location: location, game: game)
+
+#     location.arcades << arcade
+
+#   end
+
+#   # Assign the location category
+
+#   category = Category.find_by(name: l['category'])
+#   location.category = category
+
+#   location.save
+
+#   # Sleep for a few seconds to keep the Geocoder from throwing errors due to
+#   # too many requests.
+
+#   sleep 5
+
+# }
+
+# # Load the 80's trivia
+
+# factoids = [
+#     "Everybody's favorite pellet muncher, Pac-Man, made his debut in Japan on October 22, 1980.",
+#     "Cabbage Patch Kids were the must-have toy of Christmas, 1983.",
+#     "On November 30, 1982 Michael Jackson thrilled fans around the world with the release of Thriller.",
+#     "In 1985 New Coke hit the market to the displeasure of sugary drink aficionados everywhere.",
+#     "On October 19, 1987 the U.S. stock market collapsed in what came to be known as Black Monday."
+# ]
+
+# factoids.each do |factoid|
+
+#   Factoid.create(body: factoid)
+
+# end
