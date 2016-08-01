@@ -1,6 +1,7 @@
 class Location < ApplicationRecord
 
   belongs_to :state, counter_cache: true
+  belongs_to :category
 
   extend FriendlyId
   friendly_id :name, use: :slugged

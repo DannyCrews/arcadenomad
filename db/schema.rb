@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801205040) do
+ActiveRecord::Schema.define(version: 20160801214738) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 20160801205040) do
     t.string   "telephone",   limit: 10
     t.string   "slug"
     t.integer  "state_id"
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_locations_on_category_id"
     t.index ["slug"], name: "index_locations_on_slug", unique: true
     t.index ["state_id"], name: "index_locations_on_state_id"
   end
