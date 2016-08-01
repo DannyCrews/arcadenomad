@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801172300) do
+ActiveRecord::Schema.define(version: 20160801202010) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20160801172300) do
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
     t.string   "name"
-    t.string   "location"
     t.string   "street"
     t.string   "city"
     t.string   "zip"
@@ -49,9 +48,10 @@ ActiveRecord::Schema.define(version: 20160801172300) do
     t.decimal  "longitude",              precision: 15, scale: 10, default: "0.0"
     t.string   "description"
     t.string   "telephone",   limit: 10
-    t.string   "state"
     t.string   "slug"
+    t.integer  "state_id"
     t.index ["slug"], name: "index_locations_on_slug", unique: true
+    t.index ["state_id"], name: "index_locations_on_state_id"
   end
 
   create_table "manufacturers", force: :cascade do |t|
@@ -63,8 +63,9 @@ ActiveRecord::Schema.define(version: 20160801172300) do
   create_table "states", force: :cascade do |t|
     t.string   "name"
     t.string   "abbreviation"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "locations_count"
   end
 
 end

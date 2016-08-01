@@ -1,5 +1,7 @@
 class Location < ApplicationRecord
 
+  belongs_to :state
+
   extend FriendlyId
   friendly_id :name, use: :slugged
 
@@ -14,6 +16,8 @@ class Location < ApplicationRecord
   validates :street, presence: { message: 'A street address is required' }
 
   validates :city, presence: { message: 'A city is required.' }
+
+  validates :state, presence: { message: 'A state must be assigned to the location'}
 
   validates :zip, presence: { message: 'A zip code is required' }
 
