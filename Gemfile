@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'friendly_id', '~> 5.1.0'
 gem 'will_paginate'
 
 group :development, :test do

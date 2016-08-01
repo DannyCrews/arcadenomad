@@ -1,7 +1,7 @@
 Tracking <%= pluralize(@count, "location") %>
 <ul>
   <% @locations.each do |location| %>
-    <li><%= link_to location.name, location_path(location) %> </li>
+    <li><%= link_to location.name, location_path(location.friendly_id) %> </li>
   <% end %>
 </ul>
 

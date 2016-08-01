@@ -1,5 +1,8 @@
 class Location < ApplicationRecord
 
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   validates :name, presence: { message: 'The location name is required and must
                             be unique.' }
 
@@ -30,6 +33,10 @@ class Location < ApplicationRecord
 
   def address
     street + ' ' + city + ' ' + state + ' ' + zip
+  end
+
+  def should_generate_new_friendly_id?
+    name_changed?
   end
 
   private
