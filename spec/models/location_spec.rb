@@ -13,9 +13,9 @@ RSpec.describe Location, :type => :model do
       expect(@location).to be_a Location
     end
 
-    # it 'should belong to State' do
-    #   expect(@location).to belong_to :state
-    # end
+    it 'should belong to State' do
+      expect(@location).to belong_to :state
+    end
 
     # it 'should belong to Category' do
     #   expect(@location).to belong_to :category
