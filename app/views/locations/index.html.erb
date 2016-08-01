@@ -4,3 +4,6 @@ Tracking <%= pluralize(@count, "location") %>
     <li><%= link_to location.name, location_path(location) %> </li>
   <% end %>
 </ul>
+
+<%= will_paginate @locations %>
+
