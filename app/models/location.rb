@@ -27,6 +27,10 @@ class Location < ApplicationRecord
   after_create :log_location
   # before_validation :normalize_telephone
 
+  # scopes
+  scope :has_url, -> { where("url <> ''") }
+  scope :has_telephone, -> { where("telephone <> ''") }
+
   def to_s
     "#{id} - Created: #{created_at} - Updated: <div id="">updated_at</div>"
   end
