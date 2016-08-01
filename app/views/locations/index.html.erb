@@ -1,5 +1,6 @@
+Tracking <%= pluralize(@count, "location") %>
 <ul>
   <% @locations.each do |location| %>
-    <li><%= location.name %> </li>
+    <li><%= link_to location.name, location_path(location) %> </li>
   <% end %>
 </ul>
