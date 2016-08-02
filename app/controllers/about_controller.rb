@@ -1,5 +1,7 @@
 class AboutController < ApplicationController
   def index
+    @locations_count = Location.count
+    @games_count = Game.count
   end
 
   def new
