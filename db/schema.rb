@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801214738) do
+ActiveRecord::Schema.define(version: 20160801235715) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "slug"
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -37,7 +39,9 @@ ActiveRecord::Schema.define(version: 20160801214738) do
     t.datetime "updated_at",      null: false
     t.integer  "release_date"
     t.integer  "manufacturer_id"
+    t.string   "slug"
     t.index ["manufacturer_id"], name: "index_games_on_manufacturer_id"
+    t.index ["slug"], name: "index_games_on_slug", unique: true
   end
 
   create_table "locations", force: :cascade do |t|
