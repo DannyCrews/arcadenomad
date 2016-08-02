@@ -12,6 +12,15 @@ class Game < ApplicationRecord
   belongs_to :manufacturer
   has_many :arcades, inverse_of: :game
   has_many :locations, through: :arcades
+  has_many :comments, as: :commentable
+
+  scope :released_in, ->(year) { where('release_date = ?', year) }
+
+  scope :popular, -> {
+    joins(:arcades).select('games.*, location_id, count(game_id) as `game_count`')
+    .group(:game_id)
+    .order('game_count desc')
+  }
 
   extend FriendlyId
   friendly_id :name, :use => :slugged

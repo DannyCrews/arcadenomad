@@ -5,9 +5,7 @@ class Location < ApplicationRecord
   has_many :arcades, inverse_of: :location
   has_many :games, -> { select('games.*, arcades.comment as comment')
     .order('games.name asc') },  :through => :arcades
-
-  extend FriendlyId
-  friendly_id :name, use: :slugged
+  has_many :comments, as: :commentable
 
   validates :name, presence: { message: 'The location name is required and must
                             be unique.' }
@@ -30,18 +28,15 @@ class Location < ApplicationRecord
                                       must consist of only integers' }
     z.validates :zip, length: { is: 5, message: 'The zip code must consist of
                                       exactly five digits' }
-  end
+    end
 
   validates :telephone, length: { is: 10, message: 'The telephone number must
   consist of exactly 10 digits' }, allow_blank: true, if: "telephone.present?"
 
-  after_create :log_location
-  # before_validation :normalize_telephone
-
   # scopes
   scope :has_url, -> { where("url <> ''") }
   scope :has_telephone, -> { where("telephone <> ''") }
-
+  scope :latest_by_type, -> (category) { joins(:category).where('categories.name = ?', category) }
   def to_s
     "#{id} - Created: #{created_at} - Updated: <div id="">updated_at</div>"
   end
@@ -50,11 +45,11 @@ class Location < ApplicationRecord
     street + ' ' + city + ' ' + state + ' ' + zip
   end
 
-  # def telephone=(value)
-  #   unless value.nil?
-  #     write_attribute(:telephone, normalize_telephone)
-  #   end
-  # end
+  def telephone=(value)
+    unless value.nil?
+      write_attribute(:telephone, value.gsub(/[^0-9]/i, ''))
+    end
+  end
 
   def address
     return false unless self.errors.empty?
@@ -65,14 +60,16 @@ class Location < ApplicationRecord
     name_changed?
   end
 
-  private
-
-  def log_location
-    logger.info "New location #{id} - #{name} created"
+  def address
+    return false unless self.errors.empty?
+    [street, city, state.name].compact.join(', ')
   end
 
-  def normalize_telephone
-    telephone.gsub!(/[^0-9]/i, '')
+  def should_generate_new_friendly_id?
+    name_changed?
   end
 
+
+  extend FriendlyId
+  friendly_id :name, use: :slugged
 end

@@ -136,7 +136,7 @@ locations_data.each { |l|
   # Sleep for a few seconds to keep the Geocoder from throwing errors due to
   # too many requests.
 
-  sleep 5
+  # sleep 5
 
 }
 
