@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802002407) do
+ActiveRecord::Schema.define(version: 20160802134606) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20160802002407) do
   create_table "games_locations", id: false, force: :cascade do |t|
     t.integer "game_id",     null: false
     t.integer "location_id", null: false
-    t.index ["game_id", "location_id"], name: "index_games_locations_on_game_id_and_location_id"
-    t.index ["location_id", "game_id"], name: "index_games_locations_on_location_id_and_game_id"
+    t.index ["game_id", "location_id"], name: "index_games_locations_on_game_id_and_location_id", unique: true
+    t.index ["location_id", "game_id"], name: "index_games_locations_on_location_id_and_game_id", unique: true
   end
 
   create_table "locations", force: :cascade do |t|
