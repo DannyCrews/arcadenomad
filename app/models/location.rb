@@ -2,6 +2,7 @@ class Location < ApplicationRecord
 
   belongs_to :state, counter_cache: true
   belongs_to :category
+  has_and_belongs_to_many :games
 
   extend FriendlyId
   friendly_id :name, use: :slugged

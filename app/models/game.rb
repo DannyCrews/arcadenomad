@@ -10,6 +10,7 @@ class Game < ApplicationRecord
                   message: 'The release date must be between 1970 and 1989.'
               }
   belongs_to :manufacturer
+  has_and_belongs_to_many :locations
 
   extend FriendlyId
   friendly_id :name, :use => :slugged

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160801235715) do
+ActiveRecord::Schema.define(version: 20160802002407) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -44,6 +44,13 @@ ActiveRecord::Schema.define(version: 20160801235715) do
     t.index ["slug"], name: "index_games_on_slug", unique: true
   end
 
+  create_table "games_locations", id: false, force: :cascade do |t|
+    t.integer "game_id",     null: false
+    t.integer "location_id", null: false
+    t.index ["game_id", "location_id"], name: "index_games_locations_on_game_id_and_location_id"
+    t.index ["location_id", "game_id"], name: "index_games_locations_on_location_id_and_game_id"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
@@ -58,6 +65,7 @@ ActiveRecord::Schema.define(version: 20160801235715) do
     t.string   "slug"
     t.integer  "state_id"
     t.integer  "category_id"
+    t.string   "url"
     t.index ["category_id"], name: "index_locations_on_category_id"
     t.index ["slug"], name: "index_locations_on_slug", unique: true
     t.index ["state_id"], name: "index_locations_on_state_id"
