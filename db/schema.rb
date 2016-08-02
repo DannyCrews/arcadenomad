@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802134606) do
+ActiveRecord::Schema.define(version: 20160802142127) do
+
+  create_table "arcades", force: :cascade do |t|
+    t.integer  "game_id"
+    t.integer  "location_id"
+    t.string   "comment"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["game_id"], name: "index_arcades_on_game_id"
+    t.index ["location_id"], name: "index_arcades_on_location_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"

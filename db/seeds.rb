@@ -116,15 +116,15 @@ locations_data.each { |l|
 
   games = l['games']
 
-  # games.each do |g|
+  games.each do |g|
 
-  #   game = Game.find_by(name: g)
+    game = Game.find_by(name: g)
 
-  #   arcade = Arcade.new(location: location, game: game)
+    arcade = Arcade.new(location: location, game: game)
 
-  #   location.arcades << arcade
+    location.arcades << arcade
 
-  # end
+  end
 
   # Assign the location category
 

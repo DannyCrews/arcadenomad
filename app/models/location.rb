@@ -2,7 +2,9 @@ class Location < ApplicationRecord
 
   belongs_to :state
   belongs_to :category,touch: true, counter_cache:true
-  has_and_belongs_to_many :games, -> { order('name asc') }
+  has_many :arcades, inverse_of: :location
+  has_many :games, -> { select('games.*, arcades.comment as comment')
+    .order('games.name asc') },  :through => :arcades
 
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -48,11 +50,11 @@ class Location < ApplicationRecord
     street + ' ' + city + ' ' + state + ' ' + zip
   end
 
-  def telephone=(value)
-    unless value.nil?
-      write_attribute(:telephone, normalize_telephone)
-    end
-  end
+  # def telephone=(value)
+  #   unless value.nil?
+  #     write_attribute(:telephone, normalize_telephone)
+  #   end
+  # end
 
   def address
     return false unless self.errors.empty?
