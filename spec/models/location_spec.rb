@@ -17,35 +17,35 @@ RSpec.describe Location, :type => :model do
       expect(@location).to belong_to :state
     end
 
-    # it 'should belong to Category' do
-    #   expect(@location).to belong_to :category
-    # end
+    it 'should belong to Category' do
+      expect(@location).to belong_to :category
+    end
 
-    # it 'should have many games through arcades' do
-    #   expect(@location).to have_many(:games).through(:arcades)
-    # end
+    it 'should have many games through arcades' do
+      expect(@location).to have_and_belong_to_many :games
+    end
 
   end
 
-  # it 'should order a locations games alphabetically' do
+  it 'should order a locations games alphabetically' do
 
-  #   game_1 = FactoryGirl.build(:game, name: 'Pac-Man')
+    game_1 = FactoryGirl.build(:game, name: 'Pac-Man')
 
-  #   game_2 = FactoryGirl.build(:game, name: 'Ikari Warriors')
+    game_2 = FactoryGirl.build(:game, name: 'Ikari Warriors')
 
-  #   game_3 = FactoryGirl.build(:game, name: 'Shinobi')
+    game_3 = FactoryGirl.build(:game, name: 'Shinobi')
 
-  #   @location.save
+    @location.save
 
-  #   @location.arcades.create(game: game_1)
-  #   @location.arcades.create(game: game_2)
-  #   @location.arcades.create(game: game_3)
+    @location.games << game_1
+    @location.games << game_2
+    @location.games << game_3
 
-  #   @location.reload
+    @location.reload
 
-  #   expect(@location.games).to eq([game_2, game_1, game_3])
+    expect(@location.games).to eq([game_2, game_1, game_3])
 
-  # end
+  end
 
 
   context 'when valid' do

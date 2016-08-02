@@ -1,8 +1,8 @@
 class Location < ApplicationRecord
 
-  belongs_to :state, counter_cache: true
-  belongs_to :category
-  has_and_belongs_to_many :games
+  belongs_to :state
+  belongs_to :category,touch: true, counter_cache:true
+  has_and_belongs_to_many :games, -> { order('name asc') }
 
   extend FriendlyId
   friendly_id :name, use: :slugged
@@ -30,6 +30,9 @@ class Location < ApplicationRecord
                                       exactly five digits' }
   end
 
+  validates :telephone, length: { is: 10, message: 'The telephone number must
+  consist of exactly 10 digits' }, allow_blank: true, if: "telephone.present?"
+
   after_create :log_location
   # before_validation :normalize_telephone
 
@@ -43,6 +46,17 @@ class Location < ApplicationRecord
 
   def address
     street + ' ' + city + ' ' + state + ' ' + zip
+  end
+
+  def telephone=(value)
+    unless value.nil?
+      write_attribute(:telephone, normalize_telephone)
+    end
+  end
+
+  def address
+    return false unless self.errors.empty?
+    [street, city, state.name].compact.join(', ')
   end
 
   def should_generate_new_friendly_id?
