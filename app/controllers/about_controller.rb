@@ -3,6 +3,7 @@ class AboutController < ApplicationController
   end
 
   def new
+    @contact = ContactForm.new
   end
 
   def create

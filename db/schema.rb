@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802182057) do
+ActiveRecord::Schema.define(version: 20160802192013) do
 
   create_table "arcades", force: :cascade do |t|
     t.integer  "game_id"
@@ -39,6 +39,11 @@ ActiveRecord::Schema.define(version: 20160802182057) do
     t.datetime "updated_at",       null: false
   end
 
+  create_table "contact_forms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -61,13 +66,6 @@ ActiveRecord::Schema.define(version: 20160802182057) do
     t.string   "slug"
     t.index ["manufacturer_id"], name: "index_games_on_manufacturer_id"
     t.index ["slug"], name: "index_games_on_slug", unique: true
-  end
-
-  create_table "games_locations", id: false, force: :cascade do |t|
-    t.integer "game_id",     null: false
-    t.integer "location_id", null: false
-    t.index ["game_id", "location_id"], name: "index_games_locations_on_game_id_and_location_id", unique: true
-    t.index ["location_id", "game_id"], name: "index_games_locations_on_location_id_and_game_id", unique: true
   end
 
   create_table "locations", force: :cascade do |t|
