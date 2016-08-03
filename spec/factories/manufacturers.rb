@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :manufacturer do
-    name 'Midway'
+    name 'Atari'
   end
 end

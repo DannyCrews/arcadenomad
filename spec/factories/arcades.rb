@@ -1,7 +1,8 @@
+
 FactoryGirl.define do
   factory :arcade do
-    game nil
-    location nil
-    comment "MyString"
+    association :game
+    association :location
+    comment 'Broken 1UP button'
   end
 end

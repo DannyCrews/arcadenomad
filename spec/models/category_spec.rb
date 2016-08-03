@@ -1,5 +1,22 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe Category, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Category do
+
+  before(:each) do
+    @category = FactoryGirl.build(:category)
+  end
+
+  it 'can be instantiated' do
+
+    @category.should be_an_instance_of(Category)
+
+  end
+
+  it 'is invalid without a name' do
+
+    @category.name = ''
+    @category.should_not be_valid
+
+  end
+
 end

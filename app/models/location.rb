@@ -10,8 +10,7 @@ class Location < ApplicationRecord
   validates :name, presence: { message: 'The location name is required and must
                             be unique.' }
 
-  validates :name, uniqueness: { message: 'The location name must be unique.'
-                                }, if: "name.present?"
+  # validates :name, uniqueness: { message: 'The location name must be unique.'}, if: "name.present?"
 
   validates :description, presence: { message: 'A short location description is
                                      required.' }

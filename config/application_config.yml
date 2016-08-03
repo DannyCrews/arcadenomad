@@ -1,0 +1,15 @@
+defaults: &defaults
+  ADMIN_EMAIL: 'admin@example.com'
+  ADMIN_SENDER: 'admin@example.com'
+  ADMIN_EMAIL_DOMAIN: 'example.com'
+  ADMIN_EMAIL_USERNAME: 'admin'
+  ADMIN_EMAIL_PASSWORD: 'secret_pswd'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

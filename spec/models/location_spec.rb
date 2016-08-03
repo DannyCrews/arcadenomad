@@ -1,3 +1,9 @@
+#
+#
+#
+#
+#
+
 require 'rails_helper'
 
 RSpec.describe Location, :type => :model do
@@ -22,7 +28,7 @@ RSpec.describe Location, :type => :model do
     end
 
     it 'should have many games through arcades' do
-      expect(@location).to have_and_belong_to_many :games
+      expect(@location).to have_many(:games).through(:arcades)
     end
 
   end
@@ -37,9 +43,9 @@ RSpec.describe Location, :type => :model do
 
     @location.save
 
-    @location.games << game_1
-    @location.games << game_2
-    @location.games << game_3
+    @location.arcades.create(game: game_1)
+    @location.arcades.create(game: game_2)
+    @location.arcades.create(game: game_3)
 
     @location.reload
 

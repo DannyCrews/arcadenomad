@@ -8,7 +8,7 @@ feature 'Visitor uses contact form' do
     fill_in 'contact_form_email', :with => 'nolan@example.com'
     fill_in 'contact_form_message', :with => 'I love ArcadeNomad!'
     click_button 'Send message'
-    expect(page.body).to have_content('Thank you for your message!')
+    expect(page.body).to have_content('Thank you for contacting us!')
     expect(last_email.to).to have_content('arcadenomad@wjgilmore.com')
     expect(last_email.from).to have_content('nolan@example.com')
   end
