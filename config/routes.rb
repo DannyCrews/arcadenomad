@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    root 'index#index'
+    resources :index
+  end
+
   resources :about
 
   match '/contact', to: 'about#new', via: 'get', as: 'contact_new'
