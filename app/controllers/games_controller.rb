@@ -1,8 +1,11 @@
 class GamesController < ApplicationController
   def index
+    @games = Game.order('name asc').paginate(:page => params[:page],
+      :per_page => 20)
   end
 
   def show
+    @game = Game.friendly.find(params[:id])
   end
 
   def new
@@ -15,8 +18,5 @@ class GamesController < ApplicationController
   end
 
   def update
-  end
-
-  def destroy
   end
 end
