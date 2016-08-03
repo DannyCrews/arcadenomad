@@ -12,6 +12,7 @@ class Game < ApplicationRecord
   belongs_to :manufacturer
   has_many :arcades, inverse_of: :game
   has_many :locations, through: :arcades
+  accepts_nested_attributes_for :arcades
   has_many :comments, as: :commentable
 
   scope :released_in, ->(year) { where('release_date = ?', year) }

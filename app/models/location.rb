@@ -5,6 +5,7 @@ class Location < ApplicationRecord
   has_many :arcades, inverse_of: :location
   has_many :games, -> { select('games.*, arcades.comment as comment')
     .order('games.name asc') },  :through => :arcades
+  accepts_nested_attributes_for :arcades
   has_many :comments, as: :commentable
 
   validates :name, presence: { message: 'The location name is required and must
